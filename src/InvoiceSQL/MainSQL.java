@@ -54,14 +54,14 @@ import java.util.Scanner;
 							 +"Website text not null"
 							 + ");";
 					 
-			st.execute(sql1);
+			//st.execute(sql1);
 					 String sql = "INSERT INTO setting (shopName, TelNum,faxNo ,Email,Website)"+
 							 "VALUES ("+"'"+sett.getShopName()+"','"+sett.getTelNum()+"','"+sett.getFaxNo()+"','"+sett.getEmail()+"','"+sett.getWebsite()+ "')";
-					  st.execute(sql);
+					//  st.execute(sql);
 					 
-					// String sql = "INSERT INTO "
-					
+		Items1 item = new Items1();
 		
+	
 					 
 					 
 				        con.close();
