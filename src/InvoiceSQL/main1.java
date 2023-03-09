@@ -16,7 +16,59 @@ import java.util.Scanner;
 
 
 public class main1 {
+	// create table to SQL 
+	private static void CreateTable() {
+		
+		String url = "jdbc:sqlserver://localhost:1433;" +
+				 "databaseName=invoice;" +
+				 "encrypt=true;" + "trustServerCertificate=true";
+				 Scanner scanner = new Scanner(System.in);
+				 System.out.println("enter user");
+				 String user = scanner.nextLine();
+				 System.out.println("enter pass");
+				 String pass = scanner.nextLine();
+				
+				 if (user.equals(user) && pass.equals(pass)) {}else {
+				 System.out.println("worng username and password ");
+				 }
+				 
+				 Connection con = null;
+				 System.out.println("System is in prograss:");
+				 
+				 try {
+				 // create a new table
+				 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+				 DriverManager.registerDriver(driver);
+				 con = DriverManager.getConnection(url, user, pass);
+				 Statement st = con.createStatement();
+				 
+				// setting menu sql
+				 
+				 String sql1="CREATE TABLE setting (" 
+						 + "shopName text not null,"
+						 +"TelNum INTEGER not null,"
+						 +"faxNo INTEGER not null,"
+						 + "Email text not null, "
+						 +"Website text not null"
+						 + ");";
+			 System.out.println("Database saved");
+			 
+				st.execute(sql1);
+//		    st.execute(sql1);
+//				 String sql = "INSERT INTO setting (shopName, TelNum,faxNo ,Email,Website)"+
+//						 "VALUES ("+"'"+sett.getShopName()+"','"+sett.getTelNum()+"','"+sett.getFaxNo()+"','"+sett.getEmail()+"','"+sett.getWebsite()+ "')";
+//				  st.execute(sql);
+				 
 	
+				 
+				 
+			        con.close();
+				 } catch (Exception ex) {
+				 System.err.println(ex);
+				 }
+				 	 
+
+	}
 	// create an array of invoices to store all invices in the system
 	public static ArrayList<Invoice1> invoices = new ArrayList<Invoice1>();
 	
@@ -30,6 +82,16 @@ public class main1 {
 	
 	public static void main(String[] args) {
 		
+		 Scanner scanner = new Scanner(System.in);
+		 System.out.println("enter user");
+		 String user = scanner.nextLine();
+		 System.out.println("enter pass");
+		 String pass = scanner.nextLine();
+		
+		 if (user.equals(user) && pass.equals(pass)) {}else {
+		 System.out.println("worng username and password ");
+		 }
+		 
 		statisticsOptions();
 		printMenu(1);
 		MenuOptions.put("Case 0", MenuOptions.get("Case 0")+1);
@@ -120,6 +182,7 @@ public class main1 {
         
         
 	}
+
 	
 	
 	//options for settings menu
@@ -164,10 +227,12 @@ public class main1 {
 			main1.settings.setWebsite(Website);
 			
 			
-        	//st.execute(sql1);
+			
+			CreateTable();
+//			st.execute(sql1);
 			 String sql = "INSERT INTO setting (shopName, TelNum,faxNo ,Email,Website)"+
 					 "VALUES ("+"'"+sett.getShopName()+"','"+sett.getTelNum()+"','"+sett.getFaxNo()+"','"+sett.getEmail()+"','"+sett.getWebsite()+ "')";
-			//  st.execute(sql);
+			//st.execute(sql);
         	
 			
 			saveSettings();
@@ -592,56 +657,7 @@ public class main1 {
 	}
 	}
 	
-	// create table to SQL 
-		private static void CreateTable() {
-			String url = "jdbc:sqlserver://localhost:1433;" +
-					 "databaseName=invoice;" +
-					 "encrypt=true;" + "trustServerCertificate=true";
-					 Scanner scanner = new Scanner(System.in);
-					 System.out.println("enter user");
-					 String user = scanner.nextLine();
-					 System.out.println("enter pass");
-					 String pass = scanner.nextLine();
-					
-					 if (user.equals(user) && pass.equals(pass)) {}else {
-					 System.out.println("worng username and password ");
-					 }
-					 
-					 Connection con = null;
-					 System.out.println("System is in prograss:");
-					 
-					 try {
-					 // create a new table
-					 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-					 DriverManager.registerDriver(driver);
-					 con = DriverManager.getConnection(url, user, pass);
-					 Statement st = con.createStatement();
-					 
-					// setting menu sql
-					 
-					 String sql1="CREATE TABLE setting (" 
-							 + "shopName text not null,"
-							 +"TelNum INTEGER not null,"
-							 +"faxNo INTEGER not null,"
-							 + "Email text not null, "
-							 +"Website text not null"
-							 + ");";
-					 System.out.println("Database saved");
-//			//st.execute(sql1);
-//					 String sql = "INSERT INTO setting (shopName, TelNum,faxNo ,Email,Website)"+
-//							 "VALUES ("+"'"+sett.getShopName()+"','"+sett.getTelNum()+"','"+sett.getFaxNo()+"','"+sett.getEmail()+"','"+sett.getWebsite()+ "')";
-//					//  st.execute(sql);
-					 
-		
-					 
-					 
-				        con.close();
-					 } catch (Exception ex) {
-					 System.err.println(ex);
-					 }
-					 	 
 
-		}
 		
 	
 }
