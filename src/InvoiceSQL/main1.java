@@ -278,16 +278,16 @@ public class main1 {
 	       	// setting1 sett1=new setting1();
 	     	
 			 String sql1="CREATE TABLE Items1 (" 
-					 + "itemName text not null,"
-					 +"itemId Integer not null ,"
-					 +"itemprice float not null,"
-					 +"stock Integer not null, "
-					 +"quantity Integer not null"
+					 + "itemName varchar(50) not null,"
+					 +"itemId Integer,"
+					 +"itemprice float,"
+					 +"stock Integer, "
+					 +"quantity Integer"
 					 + ");";
 			 
-	    	 //System.out.println("craeted to SQL database");
+	    	 System.out.println("craeted to SQL database");
 	    
-	    	    //st.execute(sql1);
+	    	   // st.execute(sql1);
 	        
 	        // add new item
 	        if(select == 1) {
@@ -319,10 +319,10 @@ public class main1 {
 				System.out.println("New Item Saved");
 				
 				
-	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock,quantity)"+
-						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+"','"+newitem.getQuantity()+ "')";
-				st.execute(sql);
-			System.out.println(sql);
+//	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock,quantity)"+
+//						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+"','"+newitem.getQuantity()+ "')";
+//				st.execute(sql);
+//			System.out.println(sql);
 				
 				//delete item
 	        }else if(select == 2) {
@@ -511,6 +511,46 @@ public class main1 {
 	        Scanner sc = new Scanner(System.in);
 	    	Invoice1 newInvoice = new Invoice1();
 	    	
+	    	 String url = "jdbc:sqlserver://localhost:1433;databaseName=invoice;"
+		        		+ "encrypt=true;"
+		        		+ "trustServerCertificate=true";
+
+		        Scanner scanner = new Scanner(System.in);
+		       	System.out.println("enter user");
+		       	 String user = scanner.nextLine();
+		       	 System.out.println(user);
+		       	 System.out.println("enter pass");
+		       	 String pass = scanner.nextLine();
+		       	 System.out.println(pass);
+
+		       	 if (user.equals(user) && pass.equals(pass)) {}else {
+		       	 System.out.println("worng username and password ");
+		       	 }
+		       	 Connection con = null;
+		       	 System.out.println("System is in prograss:");
+		       	 try {
+		       	 // create a new table
+		       	 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+		       	 DriverManager.registerDriver(driver);
+		       	 con = DriverManager.getConnection(url, user, pass);
+		       	 Statement st = con.createStatement();
+		       	 
+		       	 String sql1="CREATE TABLE Invoice1 (" 
+						 + "invoiceNo Integer primary key,"
+						 +"invoiceDate varchar(50) not null,"
+						 +"CustomerName varchar(50) not null,"
+						 +"CustomerNumber Integer,"
+						 +"noOfItems Integer,"
+						 +"totalAmount float,"
+						 +"balance float,"
+						 +"paidAmount float,"
+						 +");";
+				 
+		    	 System.out.println("craeted to SQL database");
+		    		//st.execute(sql1);
+		
+		    	 
+	    	
 	    	//get current date in string format
 	    	Date date = new Date();
 	    	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
@@ -607,9 +647,19 @@ public class main1 {
 			//save to file
 			saveInvoices();
 			
+			 String sql = "INSERT INTO Invoice1 (invoiceNo,invoiceDate,CustomerName,CustomerNumber,noOfItems,totalAmount,paidAmount,balance)"+
+					 "VALUES ("+"'"+newInvoice.getInvoiceNo()+"','"+newInvoice.getInvoiceDate()+"','"+newInvoice.getCustomerName()+"','"+newInvoice.getCustomerNumber()+"','"+newInvoice.getNoOfItems()+"','"+newInvoice.getTotalAmount()+"','"+newInvoice.getPaidAmount()+"','"+newInvoice.getPaymentPrice()+"')";
+			System.out.println(sql);
+			st.execute(sql);
+			 
+			
 			System.out.print("Invoice Saved Successfully");
 			//return to main menu
 			main(null);
+			con.close();
+			     	}catch (Exception e) {
+			     		System.err.println(e);     
+				}
 		}
 
 		//Report: Statistics
