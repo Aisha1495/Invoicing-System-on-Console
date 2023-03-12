@@ -24,7 +24,7 @@ public class main1 {
 		
 		// create an array of items to store all items in the system
 		public static ArrayList<Items1> items = new ArrayList<Items1>();
-		
+		public static Items1 items1 = new Items1();
 		public static setting1 settings = new setting1();
 		
 		public static HashMap<String,Integer> MenuOptions = new HashMap<String,Integer>();
@@ -327,45 +327,68 @@ public class main1 {
 	        	st.execute(sql);
 			//System.out.println(sql);
 				
+	        	
 				//delete item
 	        }else if(select == 2) {
-	        	
-	        	boolean found = false;
-	        
-	        	System.out.println("Enter item ID: ");
-	        	int idOfItem = sc.nextInt();
-	        	
-	        	for(int i =0; i < main1.items.size(); i++) {
-	        		if(main1.items.get(i).getItemId() == idOfItem) {
-	        			main1.items.remove(i);
-	        			found = true;
-	        		}
+	        	System.out.print("Enter item id you want to remove it: ");
+	        	 int delete = sc.nextInt();
+	        	 String d = "DELETE FROM Items1 WHERE itemId= " + delete;
+	        	 int update = st.executeUpdate(d);
+	        	 
+	        	 ///
+	        	 
+//	        }else if(select == 2) {
+//	        	
+//	        	boolean found = false;
+//	        
+//	        	System.out.println("Enter item ID: ");
+//	        	int idOfItem = sc.nextInt();
+//	        	
+//	        	for(int i =0; i < main1.items.size(); i++) {
+//	        		if(main1.items.get(i).getItemId() == idOfItem) {
+//	        			main1.items.remove(i);
+//	        			found = true;
+//	        		}
 	        	}
-	        	
-	        	if(found) {
-		        	saveItems();
-					System.out.println("Item Deleted");
-	        	}else {
-	        		System.out.println("Item not Found");
-	        	}
+//	        	
+//	        	if(found) {
+//		        	saveItems();
+//					System.out.println("Item Deleted");
+//	        	}else {
+//	        		System.out.println("Item not Found");
+//	        	}
 
 	        	//change item price
-	        }else if(select == 3) {
-	        	
-	        	System.out.println("Enter item ID: ");
-	        	int idOfItem = sc.nextInt();
-	        	
-	        	for(int i =0; i < main1.items.size(); i++) {
-	        		if(main1.items.get(i).getItemId() == idOfItem) {
-	        			
-	        			System.out.println("Item Found Enter New Price: ");
-	        			double priceOfItem = sc.nextDouble();
-	        			
-	        			main1.items.get(i).setitemPrice(priceOfItem);
-	        			System.out.println("New Item Price Saved");
-	        			saveItems();
-	        		}
-	        	}
+	       	 else if(select == 3) {
+	        	 System.out.print("Enter item id you want to change it: ");
+	        	 int change = sc.nextInt();
+	        	 System.out.println("Entert new product price: ");
+	        	 Double itemPrice = sc.nextDouble();
+	        	 items1.setitemPrice(itemPrice);
+	        	 String newValue = Double.toString(itemPrice);
+	        	 
+	        	 
+	        	 String ch = "UPDATE Items1 SET itemPrice = " + itemPrice
+	        			 + " WHERE itemId = " + change;
+	        			 int update1 = st.executeUpdate(ch);
+	        	 
+	        	 
+//	        }else if(select == 3) {
+//	        	
+//	        	System.out.println("Enter item ID: ");
+//	        	int idOfItem = sc.nextInt();
+//	        	
+//	        	for(int i =0; i < main1.items.size(); i++) {
+//	        		if(main1.items.get(i).getItemId() == idOfItem) {
+//	        			
+//	        			System.out.println("Item Found Enter New Price: ");
+//	        			double priceOfItem = sc.nextDouble();
+//	        			
+//	        			main1.items.get(i).setitemPrice(priceOfItem);
+//	        			System.out.println("New Item Price Saved");
+//	        			saveItems();
+//	        		}
+//	        	}
 	        	
 	       
 	        	
