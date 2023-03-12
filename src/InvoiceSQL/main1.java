@@ -282,7 +282,6 @@ public class main1 {
 					 +"itemId Integer,"
 					 +"itemprice float,"
 					 +"stock Integer, "
-					 +"quantity Integer"
 					 + ");";
 			 
 	    	 System.out.println("craeted to SQL database");
@@ -319,10 +318,11 @@ public class main1 {
 				System.out.println("New Item Saved");
 				
 				
-//	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock,quantity)"+
-//						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+"','"+newitem.getQuantity()+ "')";
-//				st.execute(sql);
-//			System.out.println(sql);
+	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock)"+
+						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+ "')";
+		System.out.println(sql);
+	        	st.execute(sql);
+			//System.out.println(sql);
 				
 				//delete item
 	        }else if(select == 2) {
