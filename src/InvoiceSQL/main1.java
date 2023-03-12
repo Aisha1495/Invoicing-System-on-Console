@@ -171,16 +171,19 @@ public class main1 {
 	       	 Statement st = con.createStatement();
 	        
 	       	 setting1 sett1=new setting1();
+
 	    	
 			 String sql1="CREATE TABLE setting1 (" 
-					 + "shopName text not null,"
-					 +"TelNum Integer not null ,"
-					 +"faxNo Integer not null,"
-					 + "Email text not null, "
-					 +"Website text not null "
+					 + "shopName varchar(50) not null,"
+					 +"TelNum Integer  ,"
+					 +"faxNo Integer ,"
+					 + "Email varchar(50) not null, "
+					 +"Website varchar(50) not null "
 					 + ");";
+			 
 	    	 System.out.println("craeted to SQL database");
 	    		//st.execute(sql1);
+	
 	        
 	        // Load Data
 	        if(select == 1) {
@@ -195,7 +198,7 @@ public class main1 {
 	        }else if(select == 2) {
 	        	System.out.println("Enter Shop Name:");
 				String shopName = sc.next();
-				main1.settings.setShopName(shopName);
+				settings.setShopName(shopName);
 				System.out.println("New Shop Name Saved");
 				saveSettings();
 
@@ -218,8 +221,9 @@ public class main1 {
 				main1.settings.setWebsite(Website);
 				
 				
-				 String sql = "INSERT INTO setting1 (shopName, TelNum,faxNo ,Email,Website)"+
-						 "VALUES ("+"'"+sett1.getShopName()+"','"+sett1.getTelNum()+"','"+sett1.getFaxNo()+"','"+sett1.getEmail()+"','"+sett1.getWebsite()+ "')";
+				 String sql = "INSERT INTO setting1 (shopName,TelNum,faxNo,Email,Website)"+
+						 "VALUES ("+"'"+settings.getShopName()+"','"+settings.getTelNum()+"','"+settings.getFaxNo()+"','"+settings.getEmail()+"','"+settings.getWebsite()+ "')";
+				System.out.println(sql);
 				 st.execute(sql);
 				 
 				 
@@ -247,6 +251,44 @@ public class main1 {
 	        Scanner sc = new Scanner(System.in);
 	        int select = sc.nextInt();
 	        
+	        String url = "jdbc:sqlserver://localhost:1433;databaseName=invoice;"
+	        		+ "encrypt=true;"
+	        		+ "trustServerCertificate=true";
+
+	        Scanner scanner = new Scanner(System.in);
+	       	System.out.println("enter user");
+	       	 String user = scanner.nextLine();
+	       	 System.out.println(user);
+	       	 System.out.println("enter pass");
+	       	 String pass = scanner.nextLine();
+	       	 System.out.println(pass);
+
+	       	 if (user.equals(user) && pass.equals(pass)) {}else {
+	       	 System.out.println("worng username and password ");
+	       	 }
+	       	 Connection con = null;
+	       	 System.out.println("System is in prograss:");
+	       	 try {
+	       	 // create a new table
+	       	 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+	       	 DriverManager.registerDriver(driver);
+	       	 con = DriverManager.getConnection(url, user, pass);
+	       	 Statement st = con.createStatement();
+	        
+	       	// setting1 sett1=new setting1();
+	     	
+			 String sql1="CREATE TABLE Items1 (" 
+					 + "itemName text not null,"
+					 +"itemId Integer not null ,"
+					 +"itemprice float not null,"
+					 +"stock Integer not null, "
+					 +"quantity Integer not null"
+					 + ");";
+			 
+	    	 //System.out.println("craeted to SQL database");
+	    
+	    	    //st.execute(sql1);
+	        
 	        // add new item
 	        if(select == 1) {
 	        	
@@ -269,10 +311,18 @@ public class main1 {
 				int stockOfItems = sc.nextInt();
 				newitem.setStock(stockOfItems);
 				
+			
+					
 				//add new item to the global items array
 				main1.items.add(newitem);
 				saveItems();
 				System.out.println("New Item Saved");
+				
+				
+	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock,quantity)"+
+						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+"','"+newitem.getQuantity()+ "')";
+				st.execute(sql);
+			System.out.println(sql);
 				
 				//delete item
 	        }else if(select == 2) {
@@ -314,6 +364,8 @@ public class main1 {
 	        		}
 	        	}
 	        	
+	       
+	        	
 	        	//print all items
 	        }else if(select == 4) {
 	        	System.out.println("-------------------");
@@ -329,6 +381,11 @@ public class main1 {
 	        
 			printMenu(3);
 			itemsMenu();
+			
+			con.close();
+		     	}catch (Exception e) {
+		     		System.err.println(e);     
+			}
 		}
 		
 		//save settings to file
