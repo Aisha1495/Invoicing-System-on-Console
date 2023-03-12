@@ -172,7 +172,7 @@ public class main1 {
 	        
 	       	 setting1 sett1=new setting1();
 
-	    	
+	    	//create table setting
 			 String sql1="CREATE TABLE setting1 (" 
 					 + "shopName varchar(50) not null,"
 					 +"TelNum Integer  ,"
@@ -220,7 +220,7 @@ public class main1 {
 				String Website = sc.next();
 				main1.settings.setWebsite(Website);
 				
-				
+				//insert to the table setting into SQL 
 				 String sql = "INSERT INTO setting1 (shopName,TelNum,faxNo,Email,Website)"+
 						 "VALUES ("+"'"+settings.getShopName()+"','"+settings.getTelNum()+"','"+settings.getFaxNo()+"','"+settings.getEmail()+"','"+settings.getWebsite()+ "')";
 				System.out.println(sql);
@@ -276,7 +276,10 @@ public class main1 {
 	       	 Statement st = con.createStatement();
 	        
 	       	// setting1 sett1=new setting1();
-	     	
+	       	 
+	       	 
+	       	 
+	     	//create table items
 			 String sql1="CREATE TABLE Items1 (" 
 					 + "itemName varchar(50) not null,"
 					 +"itemId Integer,"
@@ -317,7 +320,7 @@ public class main1 {
 				saveItems();
 				System.out.println("New Item Saved");
 				
-				
+				//insert to the table items into SQL 
 	        	String sql = "INSERT INTO Items1 (itemName,itemId,itemprice,stock)"+
 						 "VALUES ("+"'"+newitem.getItemName()+"','"+newitem.getItemId()+"','"+newitem.getitemPrice()+"','"+newitem.getStock()+ "')";
 		System.out.println(sql);
@@ -534,7 +537,7 @@ public class main1 {
 		       	 DriverManager.registerDriver(driver);
 		       	 con = DriverManager.getConnection(url, user, pass);
 		       	 Statement st = con.createStatement();
-		       	 
+		       	 //create table for invoice
 		       	 String sql1="CREATE TABLE Invoice1 (" 
 						 + "invoiceNo Integer primary key,"
 						 +"invoiceDate varchar(50) not null,"
@@ -647,6 +650,8 @@ public class main1 {
 			//save to file
 			saveInvoices();
 			
+			
+			//insert to the table invoice into SQL 
 			 String sql = "INSERT INTO Invoice1 (invoiceNo,invoiceDate,CustomerName,CustomerNumber,noOfItems,totalAmount,paidAmount,balance)"+
 					 "VALUES ("+"'"+newInvoice.getInvoiceNo()+"','"+newInvoice.getInvoiceDate()+"','"+newInvoice.getCustomerName()+"','"+newInvoice.getCustomerNumber()+"','"+newInvoice.getNoOfItems()+"','"+newInvoice.getTotalAmount()+"','"+newInvoice.getPaidAmount()+"','"+newInvoice.getPaymentPrice()+"')";
 			System.out.println(sql);
